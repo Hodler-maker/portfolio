@@ -558,6 +558,24 @@
       font-weight: 300;
       opacity: 0.3;
     }
+    .game-play-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      padding: 0.55rem 1.25rem;
+      background: var(--grad-main);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: clamp(0.62rem, 0.9vw, 0.72rem);
+      border-radius: 999px;
+      transition: opacity 0.2s, transform 0.2s;
+      width: fit-content;
+    }
+    .game-play-link:hover { opacity: 0.85; transform: translateY(-2px); }
+    .game-play-link:active { transform: translateY(0); }
 
     /* ── GALLERY ── */
     #gallery { background: var(--dark); }
@@ -1139,6 +1157,7 @@
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
+    <a href="#games">Games</a>
     <a href="#speaker">On Stage</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
@@ -1153,6 +1172,7 @@
   <a href="#about" class="mobile-nav-link">About</a>
   <a href="#skills" class="mobile-nav-link">Skills</a>
   <a href="#experience" class="mobile-nav-link">Experience</a>
+  <a href="#games" class="mobile-nav-link">Games</a>
   <a href="#speaker" class="mobile-nav-link">On Stage</a>
   <a href="#gallery" class="mobile-nav-link">Gallery</a>
   <a href="#contact" class="mobile-nav-link">Contact</a>
@@ -1242,6 +1262,16 @@
   <div class="container">
     <h2 id="exp-heading" class="exp-title hero-heading reveal">Experience</h2>
     <div class="exp-cards" id="exp-cards" role="list"></div>
+  </div>
+</section>
+
+<!-- ── GAMES ── -->
+<section id="games" class="section-pad" aria-labelledby="games-heading">
+  <div class="container">
+    <p class="section-supertitle reveal">Built with AI</p>
+    <h2 id="games-heading" class="section-title-dark hero-heading reveal" style="transition-delay:.1s">Games</h2>
+    <div class="cards-grid" id="games-cards" role="list"></div>
+    <p class="events-summary reveal">2 games · Designed &amp; built with AI-assisted development · Live &amp; playable</p>
   </div>
 </section>
 
@@ -1377,6 +1407,11 @@ const EXP_BGSOLD = [
   "linear-gradient(135deg,#0C0C0C 0%,#1a1a0a 100%)"
 ];
 
+const GAMES = [
+  { name: "Hanging Man", emoji: "🎯", role: "Word Game", tag: "AI-Assisted Development", topic: "The classic word-guessing game, reimagined", desc: "A fast, polished take on the classic hangman game — designed, coded, and shipped end-to-end with AI-assisted development.", url: "https://hangingman-ten.vercel.app/" },
+  { name: "Opération Satoshi", emoji: "🕵️", role: "Web3 Investigation Game", tag: "AI-Assisted Development", topic: "A real treasure hunt through Bitcoin's history", desc: "An interactive investigation game sending players through real archives where Satoshi Nakamoto once posted — blending Bitcoin history, gamification, a card collection system, and a community-wide puzzle.", url: "https://operation-satoshi.vercel.app/" }
+];
+
 const SPEAKER_EVENTS = [
   { name: "Crypto Mastermind", period: "2019 & 2021", location: "Cotonou, Bénin", role: "Speaker", topic: "Crypto adoption in Francophone Africa", desc: "A flagship event gathering crypto leaders and enthusiasts to share strategies, innovations, and insights.", emoji: "🌍" },
   { name: "Ouaga Blockchain", period: "2021", location: "Ouagadougou, Burkina Faso", role: "Speaker", topic: "The role of Community Building in the Web3 ecosystem", desc: "A regional event aimed at educating and connecting blockchain actors in West Africa.", emoji: "⛓️" },
@@ -1447,6 +1482,25 @@ EXPERIENCE.forEach((e, i) => {
         <span class="exp-type-badge">${e.type}</span>
       </div>
       <div class="exp-bullets">${bullets}</div>
+    </div>`;
+});
+
+/* ─ RENDER GAMES ─ */
+const gamesCards = document.getElementById('games-cards');
+GAMES.forEach((g, i) => {
+  gamesCards.innerHTML += `
+    <div class="speaker-card reveal" style="transition-delay:${i * 0.08}s" role="listitem">
+      <div class="card-top">
+        <span class="card-emoji" aria-hidden="true">${g.emoji}</span>
+        <span class="card-role-badge">${g.role}</span>
+      </div>
+      <div>
+        <h3 class="card-event-name">${g.name}</h3>
+        <p class="card-period">${g.tag}</p>
+      </div>
+      <p class="card-topic">"${g.topic}"</p>
+      <p class="card-desc">${g.desc}</p>
+      <a class="game-play-link" href="${g.url}" target="_blank" rel="noopener">▶ Play Now</a>
     </div>`;
 });
 
