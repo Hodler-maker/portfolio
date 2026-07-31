@@ -324,15 +324,70 @@
       opacity: 0.6;
       margin-top: 0.25rem;
     }
-<!-- dans .nav-links -->
-<a href="#about">About</a>
-<a href="#rankings">Rankings</a>
-<a href="#skills">Skills</a>
 
-<!-- dans #mobile-menu -->
-<a href="#about" class="mobile-nav-link">About</a>
-<a href="#rankings" class="mobile-nav-link">Rankings</a>
-<a href="#skills" class="mobile-nav-link">Skills</a>
+    /* ── RANKINGS ── */
+    #rankings { background: var(--dark); position: relative; overflow: hidden; }
+    .rankings-badge-row { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+    .rankings-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1.25rem; border-radius: 999px;
+      background: linear-gradient(135deg, rgba(182,0,168,0.15), rgba(118,33,176,0.15));
+      border: 1px solid rgba(182,0,168,0.35);
+      font-size: clamp(0.65rem, 1vw, 0.8rem); text-transform: uppercase;
+      letter-spacing: 0.14em; font-weight: 600; color: var(--light);
+    }
+    .rankings-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: clamp(1rem, 2vw, 1.5rem);
+    }
+    .rank-card {
+      position: relative; z-index: 0; display: flex; flex-direction: column; gap: 0.9rem;
+      padding: clamp(1.5rem, 3vw, 2rem); border-radius: 24px;
+      background: linear-gradient(160deg, #151515 0%, #1a0e26 100%);
+      border: 1px solid rgba(215,226,234,0.1);
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+    .rank-card::before {
+      content: ''; position: absolute; inset: -1px; border-radius: 25px;
+      background: var(--grad-main); opacity: 0; transition: opacity 0.35s; z-index: -1;
+    }
+    .rank-card:hover::before { opacity: 0.3; }
+    .rank-card:hover {
+      transform: translateY(-6px); border-color: rgba(182,0,168,0.5);
+      box-shadow: 0 22px 60px rgba(182,0,168,0.16);
+    }
+    .rank-card.featured { background: linear-gradient(160deg, #1c0f1a 0%, #2a0f22 100%); border-color: rgba(190,76,0,0.35); }
+    .rank-top { display: flex; align-items: center; justify-content: space-between; }
+    .rank-medal { font-size: 1.6rem; line-height: 1; }
+    .rank-number {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1;
+      background: var(--grad-text); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.01em;
+    }
+    .rank-label {
+      font-size: clamp(0.62rem, 0.9vw, 0.75rem); text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--light); opacity: 0.55; font-weight: 600;
+    }
+    .rank-category {
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem); font-weight: 600; line-height: 1.4;
+      color: var(--light); font-family: 'Barlow', sans-serif;
+    }
+    .rank-link {
+      display: inline-flex; align-items: center; gap: 0.4rem; margin-top: auto;
+      font-size: clamp(0.68rem, 1vw, 0.78rem); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--light); opacity: 0.75;
+      transition: opacity 0.2s, gap 0.2s; word-break: break-word;
+      position: relative; z-index: 1; cursor: pointer;
+    }
+    .rank-link:hover { opacity: 1; gap: 0.6rem; }
+    .rankings-footnote {
+      text-align: center; margin-top: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(0.65rem, 0.9vw, 0.8rem); text-transform: uppercase;
+      letter-spacing: 0.12em; font-weight: 300; opacity: 0.35;
+    }
+
     /* ── SKILLS ── */
     #skills {
       background: #fff;
@@ -1123,6 +1178,7 @@
     #mobile-menu.open a:nth-child(4) { transition-delay: 0.20s; }
     #mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
     #mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+    #mobile-menu.open a:nth-child(7) { transition-delay: 0.35s; }
 
     /* ── BACK-TO-TOP: PULSE ── */
     #back-top.visible {
@@ -1164,6 +1220,7 @@
   <span class="nav-logo">Etche</span>
   <div class="nav-links">
     <a href="#about">About</a>
+    <a href="#rankings">Rankings</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#games">Games</a>
@@ -1179,6 +1236,7 @@
 <!-- ── MOBILE MENU ── -->
 <div id="mobile-menu" role="dialog" aria-label="Menu mobile" aria-modal="true">
   <a href="#about" class="mobile-nav-link">About</a>
+  <a href="#rankings" class="mobile-nav-link">Rankings</a>
   <a href="#skills" class="mobile-nav-link">Skills</a>
   <a href="#experience" class="mobile-nav-link">Experience</a>
   <a href="#games" class="mobile-nav-link">Games</a>
@@ -1255,6 +1313,18 @@
         <span class="stat-label">Engagement Growth</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── RANKINGS ── -->
+<section id="rankings" class="section-pad" aria-labelledby="rankings-heading">
+  <div class="container">
+    <div class="rankings-badge-row">
+      <span class="rankings-badge">🏆 Favikon LinkedIn Rankings</span>
+    </div>
+    <h2 id="rankings-heading" class="skills-title reveal" style="text-align:center;margin-bottom:2rem">Rankings</h2>
+    <div id="rankings-grid" class="rankings-grid" role="list"></div>
+    <p class="rankings-footnote">Classements Favikon · LinkedIn · Togo</p>
   </div>
 </section>
 
@@ -1457,6 +1527,28 @@ const POSTERS = [
   { src: "https://i.ibb.co/DDBXV5DB/JWZR6157.jpg", caption: "Barka Talks · The Truth About Crypto", tag: "May 2026 · Live Stream" },
   { src: "https://i.ibb.co/YF3QL7tj/SPEAKER.jpg", caption: "Bitcoin Mastermind 2026", tag: "Speaker · VP Bitcoin Togo Community" }
 ];
+
+const RANKINGS = [
+  { rank: "51", medal: "🌍", label: "Toutes catégories · Tous niches", category: "Top All-Categories Creator on LinkedIn — Togo", url: "https://creator.favikon.com/ranking/all-categories/all-niches/linkedin/togo/", featured: false },
+  { rank: "18", medal: "💼", label: "Business & Entrepreneurship", category: "Top Business & Entrepreneurship Creator — Togo", url: "https://creator.favikon.com/ranking/business-entrepreneurship/all-niches/linkedin/togo/", featured: false },
+  { rank: "12", medal: "🥇", label: "Business & Entrepreneurship · Hommes", category: "Top Male Business & Entrepreneurship Creator — Togo", url: "https://creator.favikon.com/ranking/business-entrepreneurship/all-niches/linkedin/togo/male/", featured: false },
+  { rank: "12", medal: "🚀", label: "African Tech & Innovation Ecosystem", category: "Top Business & Entrepreneurship Creator in African Tech & Innovation — Togo", url: "https://creator.favikon.com/ranking/business-entrepreneurship/african-tech-innovation-ecosystem/linkedin/togo/", featured: false },
+  { rank: "7", medal: "⭐", label: "African Tech & Innovation Ecosystem · Hommes", category: "Top Male Creator in African Tech & Innovation Ecosystem — Togo", url: "https://creator.favikon.com/ranking/business-entrepreneurship/african-tech-innovation-ecosystem/linkedin/togo/male/", featured: true }
+];
+/* ─ RENDER RANKINGS ─ */
+const rankingsGrid = document.getElementById('rankings-grid');
+RANKINGS.forEach((r, i) => {
+  rankingsGrid.innerHTML += `
+    <div class="rank-card reveal${r.featured ? ' featured' : ''}" style="transition-delay:${i * 0.08}s" role="listitem">
+      <div class="rank-top">
+        <span class="rank-number">#${r.rank}</span>
+        <span class="rank-medal" aria-hidden="true">${r.medal}</span>
+      </div>
+      <span class="rank-label">${r.label}</span>
+      <p class="rank-category">${r.category}</p>
+      <a class="rank-link" href="${r.url}" target="_blank" rel="noopener">View ranking ↗</a>
+    </div>`;
+});
 
 /* ─ RENDER SKILLS ─ */
 const skillsList = document.getElementById('skills-list');
