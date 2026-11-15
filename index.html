@@ -318,6 +318,74 @@
   #hero .cue { position:absolute; }
   @media (max-width:860px){ #hero .lights .o1{ width:22rem; height:22rem; } #hero .lights .o2,#hero .lights .o3{ width:16rem; height:16rem; } #hero .lights i{ filter:blur(50px); } }
   @media (prefers-reduced-motion:reduce){ #hero .lights *{ animation:none !important; } #hero .lights .spark{ display:none; } }
+
+  @media (max-width: 520px) {
+    /* Stack the hero copy and portrait instead of letting them overlap. */
+    #hero {
+      min-height: auto;
+      align-items: stretch;
+      flex-direction: column;
+      padding: 6.25rem 0 0;
+    }
+    #hero .hero-in { order: 1; padding-bottom: .5rem; }
+    #hero .portrait {
+      position: relative;
+      inset: auto;
+      order: 2;
+      width: 100%;
+      height: clamp(18rem, 95vw, 25rem);
+      margin-top: .75rem;
+      overflow: hidden;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    #hero .portrait img {
+      width: auto;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+    }
+    #hero .portrait::after { height: 28%; }
+    #hero::before {
+      width: 90vw;
+      height: 90vw;
+      right: -20%;
+      top: 10%;
+    }
+
+    .wrap { padding-inline: 1.1rem; }
+    .hero-in .label {
+      max-width: 100%;
+      margin-bottom: 1rem;
+      font-size: .72rem;
+      line-height: 1.35;
+      letter-spacing: .12em;
+    }
+    h1 { font-size: clamp(2rem, 8.8vw, 2.45rem); line-height: 1.02; }
+    .lede { font-size: 1rem; line-height: 1.55; margin-bottom: 1.4rem; }
+    .cta-row { gap: 1rem; }
+    .cta-row a, .soc a { min-height: 44px; }
+    section.s { padding-block: 4rem; }
+    .stats { gap: .65rem; }
+    .stats small { font-size: .68rem; line-height: 1.35; letter-spacing: .08em; }
+    .item { grid-template-columns: 2.1rem minmax(0, 1fr); gap: .85rem; }
+    .item h3 { font-size: clamp(1.15rem, 5.1vw, 1.45rem); overflow-wrap: anywhere; }
+    .item ul { font-size: .92rem; }
+    .do > div { padding: 1.35rem 1.1rem 1.5rem; }
+    .sq h3 { font-size: 1rem; }
+    .soc { gap: .65rem; }
+    .soc a { padding: .65rem 1rem; font-size: .72rem; letter-spacing: .09em; }
+    #wa {
+      width: 48px;
+      height: 48px;
+      right: 14px;
+      bottom: max(14px, env(safe-area-inset-bottom));
+    }
+  }
+
+  /* MOBILE REFINEMENTS — prevent hero overlap and improve touch targets */
 </style>
 </head>
 <body>
